@@ -1,3 +1,33 @@
+# GoogleBooksAPI_SearchApp
+
+Search engine using Google Books API to return list of book results after user search input.
+
+## Features:
+* Users can search title or author to view list of top 5 matching results
+* Users can save books from list to their "favorites"
+* Users can view Favorites List in seperate tab
+
+## Dependencieies:
+* Axios: used to fetch data from API
+* Redux Persist: used as local storage to persist favorites data
+
+
+### `Deatailed guide to production`
+* Create react app
+* Create base components (Home and Saved age)
+* Set up routers for base components and create NavBar
+* Set up search bar and useState() to collect input data
+* Test fetching data from Google API using axios, successly read in console
+* Mapped search resultes into list elements on Home page
+* Installed and set-up react-redux to store user favorites and action items for add/delete
+* Include "Add-to-favorites" button and connect to redux state management actions
+* Install redux-persist to persist data after web refresh
+* Added logic to only add books to favorite list that has not already been added
+* Simplistic styl changes using Bootstrap
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
