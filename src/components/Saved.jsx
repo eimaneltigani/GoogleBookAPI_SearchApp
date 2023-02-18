@@ -1,15 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteBook, selectFavorites } from '../redux/listSlice';
 
 
 function Saved() {
     const favorites = useSelector(state => state.favorites);
     const dispatch = useDispatch();
-    
-    const handleDelete = (id) => {
-        dispatch(deleteBook(id));
-    }
     
     return (
         <div className="m-5">
@@ -20,9 +15,9 @@ function Saved() {
                     {favorites.map(favorite => {
                         return (
                             <li key={favorite.id}>
-                                <p><b>Author:</b> {favorite.author}</p>
-                                <p><b>Title:</b> {favorite.title}</p>
-                                <p><b>Publisher:</b> {favorite.publisher}</p>
+                                <p><b>Author:</b> {favorite.volumeInfo.authors}</p>
+                                <p><b>Title:</b> {favorite.volumeInfo.title}</p>
+                                <p><b>Publisher:</b> {favorite.volumeInfo.publisher}</p>
                                 <button onClick={() => handleDelete(favorite.id)}>Remove from Favorites</button>
                             </li>
                         )

@@ -11,7 +11,7 @@ export const listSlice = createSlice({
         },
         deleteBook: (state,action) => {
             const favorites = state.favorites.filter(book =>
-                book.id != action.payload)
+                book.id !== action.payload)
             return {...state,favorites: [...favorites]};
         }
     }

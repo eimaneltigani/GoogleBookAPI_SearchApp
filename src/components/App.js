@@ -13,7 +13,7 @@ export default function App() {
         <NavBar />
         <div>
           <Routes>
-            <Route name="Home" exact path="/Home" element={<Home />} />
+            <Route name="Home" exact path="/" element={<Home />} />
             <Route name="Favorites" exact path="/Favorites" element={<Saved />} />
           </Routes>
         </div>

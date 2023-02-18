@@ -8,11 +8,11 @@ class NavBar extends React.Component {
     return (
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="/Home"><FaSearch /></Navbar.Brand>
+            <Navbar.Brand href="/"><FaSearch /></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse>
               <Nav className="me-auto">
-                <Nav.Link href="/Home">Search</Nav.Link>
+                <Nav.Link href="/">Search</Nav.Link>
                 <Nav.Link href="/Favorites">Favorites</Nav.Link>
                 <Nav.Link>About Us</Nav.Link>
               </Nav>
