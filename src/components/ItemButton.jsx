@@ -9,17 +9,12 @@ const ItemButton = (props) => {
     let previouslyAdded = favorites.find((favorite) => favorite.id === props.book.id);
 
     const handleAdd = (book) => {
-        // if(!previouslyAdded) {
-            dispatch(addBook(book));
-        // } else {
-        //     console.log("Already added");
-        // }  
+        dispatch(addBook(book)); 
     }
 
     const handleDelete = (id) => {
         dispatch(deleteBook(id));
     }
-
 
     return (
         <div className="item-buttons">

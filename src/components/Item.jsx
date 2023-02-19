@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemButton from './ItemButton'
+import ItemButton from './ItemButton';
 
 export class Item extends React.Component {
     render() {
@@ -32,7 +32,7 @@ export class Item extends React.Component {
         }
 
         return (
-            <li className="item">
+            <li className="border">
                 <div className="item-header">
                     <div className="item-subhead">
                         <h3>{book.volumeInfo.title}</h3>
