@@ -14,7 +14,6 @@ class NavBar extends React.Component {
               <Nav className="me-auto">
                 <Nav.Link href="/Home">Search</Nav.Link>
                 <Nav.Link href="/Favorites">Favorites</Nav.Link>
-                <Nav.Link>About Us</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>

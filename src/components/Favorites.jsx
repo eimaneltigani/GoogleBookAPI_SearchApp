@@ -9,7 +9,7 @@ function Favorites() {
     
     return (
         <div className="m-5">
-            <h1>Saved Books</h1>
+            <h1 className="text-center">Saved Books</h1>
             {favorites && favorites.length > 0 ? 
                 <div className="favorites">
                     {favorites.map((favorite, index) => {
