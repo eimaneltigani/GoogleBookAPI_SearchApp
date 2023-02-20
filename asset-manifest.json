@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/GoogleBookAPI_SearchApp/static/css/main.7e10305e.css",
-    "main.js": "/GoogleBookAPI_SearchApp/static/js/main.0132328b.js",
+    "main.js": "/GoogleBookAPI_SearchApp/static/js/main.36212f6d.js",
     "index.html": "/GoogleBookAPI_SearchApp/index.html",
     "main.7e10305e.css.map": "/GoogleBookAPI_SearchApp/static/css/main.7e10305e.css.map",
-    "main.0132328b.js.map": "/GoogleBookAPI_SearchApp/static/js/main.0132328b.js.map"
+    "main.36212f6d.js.map": "/GoogleBookAPI_SearchApp/static/js/main.36212f6d.js.map"
   },
   "entrypoints": [
     "static/css/main.7e10305e.css",
-    "static/js/main.0132328b.js"
+    "static/js/main.36212f6d.js"
   ]
 }
