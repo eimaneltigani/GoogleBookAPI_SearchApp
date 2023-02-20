@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/Book_Search/static/css/main.7e10305e.css",
-    "main.js": "/Book_Search/static/js/main.0132328b.js",
-    "index.html": "/Book_Search/index.html",
-    "main.7e10305e.css.map": "/Book_Search/static/css/main.7e10305e.css.map",
-    "main.0132328b.js.map": "/Book_Search/static/js/main.0132328b.js.map"
+    "main.css": "/GoogleBookAPI_SearchApp/static/css/main.7e10305e.css",
+    "main.js": "/GoogleBookAPI_SearchApp/static/js/main.0132328b.js",
+    "index.html": "/GoogleBookAPI_SearchApp/index.html",
+    "main.7e10305e.css.map": "/GoogleBookAPI_SearchApp/static/css/main.7e10305e.css.map",
+    "main.0132328b.js.map": "/GoogleBookAPI_SearchApp/static/js/main.0132328b.js.map"
   },
   "entrypoints": [
     "static/css/main.7e10305e.css",
