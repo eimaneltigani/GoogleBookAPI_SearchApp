@@ -1,0 +1,13 @@
+/* style homepage/search bar */
+input {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: ghostwhite;
+    background-color: transparent;
+}
+
+button {
+    border-color: ghostwhite;
+    background-color: transparent;
+    color: white;
+}

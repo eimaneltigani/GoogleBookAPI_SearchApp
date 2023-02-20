@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import Container from 'react-bootstrap/Container';
-
+import './Home.css';
 import { Item } from './Item';
 
 
@@ -48,7 +48,7 @@ function Home({ mainRef, resultsRef}) {
                     <div className="input">
                         <input id="search-box" 
                             type="text" 
-                            className="regFeild" 
+                            className="regField" 
                             placeholder="Enter book title..."
                             onChange={e => setSearch(e.target.value)}
                         />
