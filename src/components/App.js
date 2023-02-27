@@ -1,7 +1,6 @@
 import React from "react";
 
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-// import "../styles.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import NavBar from "./NavBar";
 import Favorites from "./Favorites";

@@ -3,6 +3,8 @@ import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import './Home.css';
 import { Item } from './Item';
+import { trackPromise } from 'react-promise-tracker';
+import LoadingIndicator from "./LoadingIndicator";
 
 
 
@@ -17,8 +19,15 @@ function Home({ mainRef, resultsRef}) {
     
     const fetchBooks = async () => {
         // Ajax call to API using Axios
-        const result = await axios.get(`${apiURL}?q=${search}&key=${apiKey}`);
-        setBookList(result.data.items);
+        try {
+            const result = await trackPromise(
+                axios.get(`${apiURL}?q=${search}&key=${apiKey}`)
+            );
+            setBookList(result.data.items);
+        } catch (err) {
+            console.log(err);
+        }
+        
         // console.log(result.data.items);
     }
     
@@ -55,6 +64,7 @@ function Home({ mainRef, resultsRef}) {
                         <button onClick={handleSubmit}>Search</button>
                     </div>
                 </div>
+                <LoadingIndicator />
             </div>
             <div className="mt-5" ref={scrollToRef} style={{backgroundColor:'#eee', minHeight:"100vh"}}>
                 <h2 className="pt-5">Search Results</h2>

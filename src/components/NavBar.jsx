@@ -2,6 +2,7 @@ import React from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaSearch} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   render() {
