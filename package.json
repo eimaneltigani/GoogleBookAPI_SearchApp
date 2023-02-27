@@ -1,7 +1,7 @@
 {
   "name": "book-search",
   "version": "0.1.0",
-  "homepage": "https://eimaneltigani.github.io/Book_Search",
+  "homepage": "https://eimaneltigani.github.io/GoogleBookAPI_SearchApp/#",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
