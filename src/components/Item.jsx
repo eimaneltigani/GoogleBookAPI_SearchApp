@@ -44,7 +44,7 @@ export class Item extends React.Component {
                             <Card.Img
                                 src={smallThumbnail}
                                 alt={smallThumbnail ? book.volumeInfo.title : 'no-image'}
-                                fluid
+                                // fluid
                                 className="w-100"
                             />
                             </Col>

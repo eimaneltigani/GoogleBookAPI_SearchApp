@@ -1,9 +1,14 @@
 import React from "react";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import NavBar from "./NavBar";
 import Favorites from "./Favorites";
+import Login from "./Login";
+
+// //aws amplify
+// import { Amplify } from 'aws-amplify';
+// import awsExports from '../aws-exports';
+// Amplify.configure(awsExports);
 
 export default function App() {
   
@@ -14,6 +19,7 @@ export default function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route name="Favorites" path="/Favorites" element={<Favorites />} />
+          <Route name="Login" path="/Login" element={<Login />} />
         </Routes>
       </Router>
     </div>
