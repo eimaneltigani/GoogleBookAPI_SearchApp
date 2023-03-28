@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { addBook, deleteBook } from '../redux/listSlice';
+import { addBook, deleteBook } from '../redux/store/listSlice';
 
 const ItemButton = (props) => {
     const favorites = useSelector(state => state.favorites);

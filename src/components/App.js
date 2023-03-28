@@ -5,10 +5,6 @@ import NavBar from "./NavBar";
 import Favorites from "./Favorites";
 import Login from "./Login";
 
-// //aws amplify
-// import { Amplify } from 'aws-amplify';
-// import awsExports from '../aws-exports';
-// Amplify.configure(awsExports);
 
 export default function App() {
   

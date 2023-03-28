@@ -7,11 +7,10 @@ import { trackPromise } from 'react-promise-tracker';
 import LoadingIndicator from "./LoadingIndicator";
 
 
-
 const apiKey = 'AIzaSyC0v5dWP4ZOKdznwi3L-Q5UsgzK37P1hVs';
 const apiURL = `https://www.googleapis.com/books/v1/volumes`;
 
-function Home({ mainRef, resultsRef}) {
+function Home() {
     const [search, setSearch] = useState("");
     const [bookList, setBookList] = useState([]);
     // add scroll functionality to results section
