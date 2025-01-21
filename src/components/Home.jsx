@@ -58,7 +58,10 @@ function Home() {
                             type="text" 
                             className="regField" 
                             placeholder="Enter book title..."
-                            onChange={e => setSearch(e.target.value)}
+                            onChange={(e) => {
+                                console.log("Input value:", e.target.value);
+                                setSearch(e.target.value);
+                              }}
                         />
                         <button onClick={handleSubmit}>Search</button>
                     </div>

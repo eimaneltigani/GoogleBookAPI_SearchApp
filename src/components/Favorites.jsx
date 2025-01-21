@@ -5,7 +5,7 @@ import { Item } from './Item';
 
 
 function Favorites() {
-    const favorites = useSelector(state => state.favorites);
+    const favorites = useSelector(state => state.favorites.favorites);
     
     return (
         <div className="m-5">

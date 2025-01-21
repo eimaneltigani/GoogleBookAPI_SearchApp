@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { addBook, deleteBook } from '../redux/store/listSlice';
+import { addBook, deleteBook } from '../redux/store/favoritesSlice';
 
 const ItemButton = (props) => {
-    const favorites = useSelector(state => state.favorites);
+    const favorites = useSelector(state => state.favorites.favorites);
     const dispatch = useDispatch();
 
     let previouslyAdded = favorites.find((favorite) => favorite.id === props.book.id);
