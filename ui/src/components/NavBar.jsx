@@ -2,7 +2,7 @@ import React from "react";
 import { Nav, Navbar, Container, Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaSearch} from "react-icons/fa";
-// import { Auth } from "aws-amplify";
+import { getCurrentUser, signOut } from "aws-amplify/auth";
 import { setAuthUser } from "../redux/store/sessionSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,19 @@ import { Link } from "react-router-dom";
 function NavBar() {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
+
+    async function currentAuthenticatedUser() {
+      try {
+        const { username, userId, signInDetails } = await getCurrentUser();
+        console.log(`The username: ${username}`);
+        console.log(`The userId: ${userId}`);
+        console.log(`The signInDetails: ${signInDetails}`);
+        dispatch(setAuthUser(user));
+      } catch (err) {
+        console.log('not logged in');
+        dispatch(setAuthUser(null));
+      }
+    }
 
     // const assessLoggedInState = () => {
     //     Auth.currentAuthenticatedUser()
@@ -26,30 +39,30 @@ function NavBar() {
     //         })
     // }
 
-    // useEffect(() => {
-    //     assessLoggedInState();
-    // }, []);
+    useEffect(() => {
+        currentAuthenticatedUser();
+    }, []);
 
-    // const signOut = async () => {
-    //     try {
-    //         await Auth.signOut();
-    //         dispatch(setAuthUser(false));
-    //     } catch (error) {
-    //         console.log('error signing out: ', error);
-    //     }
-    // };
+    const signOut = async () => {
+        try {
+            await signOut();
+            dispatch(setAuthUser(false));
+        } catch (error) {
+            console.log('error signing out: ', error);
+        }
+    };
 
-    // const authButton = () => {
-    //     if (user) {
-    //       return (
-    //         <Button variant="secondary" onClick={signOut}>Logout</Button>
-    //       )
-    //     } else {
-    //       return (
-    //         <Button variant="secondary" as={Link} to="/Login">Sign Up</Button>
-    //       )
-    //     }
-    // }
+    const authButton = () => {
+        if (user) {
+          return (
+            <Button variant="secondary" onClick={signOut}>Logout</Button>
+          )
+        } else {
+          return (
+            <Button variant="secondary" as={Link} to="/Login">Sign Up</Button>
+          )
+        }
+    }
 
     return (
         <Navbar bg="light" expand="lg">
@@ -62,9 +75,9 @@ function NavBar() {
                 <Nav.Link href="/Favorites">Favorites</Nav.Link>
               </Nav>
             </Navbar.Collapse>
-            {/* <Form inline>
+            <Form inline>
               {authButton()}
-            </Form> */}
+            </Form>
           </Container>
         </Navbar>
     );
