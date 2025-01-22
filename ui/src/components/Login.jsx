@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAuthUser } from '../redux/store/sessionSlice';
-import { getCurrentUser, signUp, SignUpInput, signIn, SignInInput } from 'aws-amplify/auth';
+import { getCurrentUser, signUp, signIn } from 'aws-amplify/auth';
 
 import './Login.css';
 
@@ -12,20 +12,39 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState('');
-    const [signUpForm, switchForm] = useState(true);
-
+    const [isSignUp, setIsSignUp] = useState(true);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleSignUp = async () => {
-        console.log('user clicked sign up');
-        navigate("/");
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setErrors(''); // Clear previous errors
 
-    const handleSignIn = async () => {
-        console.log('user clicked sign in');
-        navigate("/");
+        try {
+            if (isSignUp) {
+                if (password !== confirmPassword) {
+                    setErrors('Passwords do not match');
+                    return;
+                }
+                const { user } = await signUp({
+                    username: email,
+                    password: password
+                });
+                dispatch(setAuthUser(user));
+            } else {
+                const { user } = await signIn({
+                    username: email,
+                    password: password
+                });
+                dispatch(setAuthUser(user));
+            }
+
+            dispatch(setAuthUser(userId));
+            console.log(userId);
+        } catch (error) {
+            setErrors(error.message || 'An error occured during authentication.');
+        }
     }
 
 
@@ -58,17 +77,15 @@ const Login = () => {
     };
 
     return (
-        <>
+        <div className="mainBlock">
             {errors && <div className="Error"> {errors} </div>}
-            <div className="mainBlock">
-            <form onSubmitCapture={(e) => e.preventDefault()}>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="email"
                     className="regField"
                     placeholder="Enter email:"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
                 />
                 <input 
                     type="password"
@@ -76,55 +93,50 @@ const Login = () => {
                     placeholder="Enter password:"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
                 />
-                {signUpForm ? 
-                    <>
-                        <input 
-                            type="password"
-                            className="regField"
-                            placeholder="Enter confirm password:"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
-                        <input 
-                            type="submit" 
-                            className="submitBtn" 
-                            value="SIGN UP" 
-                            onClick={handleSignUp} 
-                        />
-                        <span className="underLine">
-                            Have an account? 
-                            <button 
-                                className="linkBtn" 
-                                onClick={() => switchForm(false)}
-                            >
-                                Sign in here
-                            </button>
-                        </span>
-                    </> :
-                    <>
-                        <input 
-                            type="submit" 
-                            className="submitBtn" 
-                            onClick={handleSignIn} 
-                            value="SIGN IN" 
-                        />
-                        <span className="underLine">
-                            Not Registered?  
-                            <button 
-                                className="linkBtn" 
-                                onClick={() => switchForm(true)}
-                            >
-                                Create an account
-                            </button>
-                        </span>    
-                    </> 
+                {isSignUp && 
+                    <input 
+                        type="password"
+                        className="regField"
+                        placeholder="Enter confirm password:"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
                 }
+                <button type="submit" className="submitBtn">
+                    {isSignUp ? "Sign Up" : "Sign In"}
+                </button>
             </form>
+            <div className="form-tag">
+                {isSignUp ? (
+                    <p>
+                        Have an account?{" "}
+                        <button 
+                            className="linkBtn" 
+                            onClick={() => {
+                                setIsSignUp(false);
+                                setErrors("");
+                            }}
+                        >
+                            Sign In
+                        </button>
+                    </p>
+                ) : (
+                    <p>
+                        Not registered?{" "} 
+                        <button 
+                            className="linkBtn" 
+                            onClick={() => {
+                                setIsSignUp(false);
+                                setErrors("");
+                            }}
+                        >
+                            Sign Up
+                        </button>
+                    </p>
+                )}
             </div>
-        </>
+        </div>
     )
 }
 

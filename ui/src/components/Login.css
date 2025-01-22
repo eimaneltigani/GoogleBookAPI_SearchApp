@@ -25,11 +25,12 @@ body {
     padding: 15px;
     box-sizing: border-box;
     font-size: 15px;
+    margin: 5px;
 }
 
 .submitBtn {
     width: 100%;
-    background: #425F9C;
+    background: #5b606e;
     border: 0;
     color: #fff;
     padding: 15px;
@@ -42,10 +43,9 @@ form {
     display: flex;
     flex-direction: column;
 }
-.underLine {
-    text-align: center;
-    margin: 7px 0 0 0;
-    display: block;
+
+.form-tag {
+    padding: 10px;
 }
 
 .linkBtn {
@@ -55,4 +55,12 @@ form {
     color: #3c4043;
     padding: 0;
     margin: 0;
+}
+
+.Error {
+    padding: 10px;
+    background-color: #feeaea;
+    border: 1px solid #fadadb;
+    margin-bottom: 10px;
+    border-radius: 3px;
 }
