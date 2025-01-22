@@ -4,10 +4,55 @@ body {
     background: #f5f5f5;
 }
 
-#main-container {
-    place-items: center center;
+.mainBlock {
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 100px auto;
+    display: table;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-#sign-in-form {
-    max-width: 330px;
+.regField {
+    width: 100%;
+    background-color: #f7f7f7;
+    color: #000;
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.submitBtn {
+    width: 100%;
+    background: #425F9C;
+    border: 0;
+    color: #fff;
+    padding: 15px;
+    margin: 10px 0 0 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+.underLine {
+    text-align: center;
+    margin: 7px 0 0 0;
+    display: block;
+}
+
+.linkBtn {
+    border: 0;
+    background-color: unset;
+    text-decoration: underline;
+    color: #3c4043;
+    padding: 0;
+    margin: 0;
 }

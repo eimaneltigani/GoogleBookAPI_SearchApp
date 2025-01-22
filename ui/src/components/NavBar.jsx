@@ -20,7 +20,7 @@ function NavBar() {
         console.log(`The username: ${username}`);
         console.log(`The userId: ${userId}`);
         console.log(`The signInDetails: ${signInDetails}`);
-        dispatch(setAuthUser(user));
+        dispatch(setAuthUser(userId));
       } catch (err) {
         console.log('not logged in');
         dispatch(setAuthUser(null));
