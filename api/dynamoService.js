@@ -7,7 +7,7 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 
 // Configure DynamoDB
-const client = new DynamoDBClient({ region: 'us-east-1' }); 
+const client = new DynamoDBClient({ region: 'us-east-2' }); 
 const docClient = DynamoDBDocumentClient.from(client);
 
 const TABLE_NAME = "UserFavorites";
