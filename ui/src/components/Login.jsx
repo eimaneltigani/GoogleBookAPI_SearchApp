@@ -51,6 +51,7 @@ const Login = () => {
 
             // set isDirty as true
             // navigate to home page
+            navigate("/");
         } catch (error) {
             setErrors(error.message || 'An error occured during authentication.');
         }
