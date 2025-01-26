@@ -1,7 +1,7 @@
 import express from "express";
 import serverless from "serverless-http";
 import cors from "cors";
-import { createUser, getUser, updateUser } from "dynamoClient.js";
+import { createUser, getUser, updateUser } from "./dynamoService.js";
 
 const app = express();
 const PORT = 3001; 
@@ -10,11 +10,11 @@ app.use(express.json());
 
 // invoke cors so we can run both apps locally
 if (process.env.DEVELOPMENT) {
-    app.use(cors());
+    app.use(cors({ origin: "*" }));
 }
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.json({message: "Hello from Express on AWS Lambda!"});
 });
 
 // Add user to db with empty favorites array
