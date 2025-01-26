@@ -6,6 +6,7 @@ import { Item } from './Item';
 
 function Favorites() {
     const favorites = useSelector(state => state.favorites.favorites);
+    console.log(favorites);
     
     return (
         <div className="m-5">

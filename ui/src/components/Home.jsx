@@ -17,6 +17,8 @@ function Home() {
     const scrollToRef = useRef();
     
     const fetchBooks = async () => {
+        // add error handling if user doesnt tpye anything
+
         // Ajax call to API using Axios
         try {
             const result = await trackPromise(

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuthUser } from '../redux/store/sessionSlice';
 import { getCurrentUser, signUp, signIn } from 'aws-amplify/auth';
 
@@ -16,6 +16,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const user1 = useSelector(state => state.session.user);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,54 +28,34 @@ const Login = () => {
                     setErrors('Passwords do not match');
                     return;
                 }
-                const { user } = await signUp({
+                const response = await signUp({
                     username: email,
-                    password: password
+                    password: password,
+                    options: {
+                        autoSignIn: true // or SignInOptions e.g { authFlowType: "USER_SRP_AUTH" }
+                    }
                 });
-                dispatch(setAuthUser(user));
+
+                // if signing up, need to add user to database
+                console.log(response);
+                // dispatch(setAuthUser(user));
             } else {
-                const { user } = await signIn({
+                console.log(email);
+                const response = await signIn({
                     username: email,
                     password: password
                 });
-                dispatch(setAuthUser(user));
+                console.log(response);
+                // dispatch(setAuthUser(user));
             }
 
-            dispatch(setAuthUser(userId));
-            console.log(userId);
+            // set isDirty as true
+            // navigate to home page
         } catch (error) {
             setErrors(error.message || 'An error occured during authentication.');
         }
     }
-
-
-    const handleAuthStateChange = async (authState) => {
-
-        if (authState === "signedIn") {
-          try {
-            // Get user information after successful sign-in
-            const { username, userId, signInDetails } = await getCurrentUser();
-            console.log(`The username: ${username}`);
-            console.log(`The userId: ${userId}`);
-            console.log(`The signInDetails: ${signInDetails}`);
-
-            // need to pull favorites from database
-            // and add to state
-            // set dirty if redux already contains favorites - means i'll need to send to db on signout
-            // ^^ or token expiration, need to check on that
-            
-            // Store user ID in redux state
-            dispatch(setAuthUser(userId));
-            
-          } catch (error) {
-            console.error("Error fetching user details: ", error);
-          }
-        } else {
-          // If user is signed out, reset Redux state
-          dispatch(setAuthUser(null));
-        }
-        navigate("/");
-    };
+    // dispatch(setAuthUser(null));
 
     return (
         <div className="mainBlock">
@@ -127,7 +108,7 @@ const Login = () => {
                         <button 
                             className="linkBtn" 
                             onClick={() => {
-                                setIsSignUp(false);
+                                setIsSignUp(true);
                                 setErrors("");
                             }}
                         >
