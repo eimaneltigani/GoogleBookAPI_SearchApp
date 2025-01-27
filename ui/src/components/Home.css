@@ -1,13 +1,93 @@
 /* style homepage/search bar */
+
+body,
+.search-content {
+    color: white;
+    font-size: 18px;
+	font-weight: 300;
+	text-align: center;
+}
+
+#search-engine {
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)),
+		url('https://wallpaperaccess.com/full/4506133.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 15% 0%;
+	background-attachment: scroll;
+	padding: 20px 0;
+	box-shadow: 0 0 10px black;
+}
+
+/* Vertically center header content */
+@media only screen and (min-height: 450px) {
+	#search-engine {
+		height: 100vh;
+	}
+	.search-content {
+		position: relative;
+		transform: translate(0px, -50%);
+		top: 40%;
+	}
+}
+
+.search-content {
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#results {
+    margin-top: 40px;
+    text-align: center;
+}
+
 input {
-    outline: 0;
-    border-width: 0 0 2px;
-    border-color: ghostwhite;
-    background-color: transparent;
+    color: white;
+    border: none;
+    border-bottom: 3px solid ghostwhite;
+	border-radius: 0px;
+	padding: 10px;
+    font-size: 28px;
+	background: none;
+	width: 300px;
+	margin: 20px 0;
+}
+
+input[type='text'] {
+	text-align: center;
 }
 
 button {
-    border-color: ghostwhite;
-    background-color: transparent;
-    color: white;
+	border: 3px solid ghostwhite;
+	margin: 0 auto;
+	padding: 8px 13px;
+	color: ghostwhite;
+	font-size: 28px;
+	font-weight: 400;
+	letter-spacing: 2px;
+	background: rgba(255, 255, 255, 0.25);
+	transition: color 0.25s linear;
+	text-shadow: 0 0 3px #555555;
+	border-radius: 0;
+	width: 250px;
+}
+
+
+@media all and (min-width: 768px) /* Tablet & iPad Pro & above */ {
+	input {
+		width: 400px;
+	}
+}
+
+/* 
+iPad */
+@media only screen and (max-width: 768px) {
+	input {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	button {
+		margin-left: 3px;
+		margin-bottom: 20px;
+	}
 }

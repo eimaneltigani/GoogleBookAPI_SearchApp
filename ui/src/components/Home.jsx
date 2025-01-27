@@ -17,7 +17,7 @@ function Home() {
     const scrollToRef = useRef();
     
     const fetchBooks = async () => {
-        // add error handling if user doesnt tpye anything
+        // add error handling if user doesnt type anything
 
         // Ajax call to API using Axios
         try {
@@ -51,25 +51,25 @@ function Home() {
     }
     
     return (
-        <div className="text-center">
-            <div className="row" style={myStyle}>
-                <div className="col-sm-12 my-auto">
-                    <h1 className="text-center text-white-50">Book Finder</h1>
+        <>
+            <div id="search-engine">
+                <div className="search-content">
+                    <h1>Google Book Search</h1>
                     <div className="input">
-                        <input id="search-box" 
+                        <input id="search-input" 
                             type="text" 
-                            className="regField" 
+                            required
                             placeholder="Enter book title..."
                             onChange={(e) => {
                                 setSearch(e.target.value);
                             }}
                         />
-                        <button onClick={handleSubmit}>Search</button>
+                        <button id="search"onClick={handleSubmit}>Search</button>
                     </div>
                 </div>
                 <LoadingIndicator />
             </div>
-            <div className="mt-5" ref={scrollToRef} style={{backgroundColor:'#eee', minHeight:"100vh"}}>
+            <div id="results" ref={scrollToRef} >
                 <h2 className="pt-5">Search Results</h2>
                 {bookList.length > 0 ? 
                     <Container fluid>
@@ -80,7 +80,7 @@ function Home() {
                     <p>No book results yet! Search the author or title to view available books.</p>
                 }
             </div>
-        </div>
+        </>
     ) 
 }
 

@@ -1,6 +1,6 @@
 # GoogleBooksAPI_SearchApp
 
-Search engine using Google Books API to return list of book results after user search input. Users can login and save their favorites to a database for permamnent persistance. 
+Search engine using Google Books API to return list of book results after search input, user can add specified books to their favorites list stored locally. Users can also login and save their favorites to a database for permamnent persistance. 
 
 [View Live](https://main.d28ng9gc5khmyd.amplifyapp.com/)
 * Users can search title or author to view list of top 5 matching results
@@ -13,7 +13,7 @@ Search engine using Google Books API to return list of book results after user s
 Client-side:
 * React
 * Redux: to persist local data
-* Axios: used to fetch data from external and defined API
+* Axios: used to fetch data from external and defined APIs endpoinys
 * AWS Amplify: used for authentication (Cognito) and delpoying front-end
 
 Client-side:
