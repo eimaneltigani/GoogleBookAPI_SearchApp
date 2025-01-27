@@ -2,7 +2,7 @@ import React from "react";
 import { Nav, Navbar, Container, Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaSearch} from "react-icons/fa";
-import { getCurrentUser, signOut } from "aws-amplify/auth";
+import { getCurrentUser, signOut as amplifySignOut } from "aws-amplify/auth";
 import { setAuthUser } from "../redux/store/sessionSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 function NavBar() {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
+    console.log(user);
 
     async function currentAuthenticatedUser() {
       try {
@@ -45,8 +46,7 @@ function NavBar() {
 
     const signOut = async () => {
         try {
-            await signOut();
-            dispatch(setAuthUser(false));
+            await amplifySignOut();
         } catch (error) {
             console.log('error signing out: ', error);
         }

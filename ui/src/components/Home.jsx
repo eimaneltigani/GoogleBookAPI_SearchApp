@@ -61,7 +61,6 @@ function Home() {
                             className="regField" 
                             placeholder="Enter book title..."
                             onChange={(e) => {
-                                console.log("Input value:", e.target.value);
                                 setSearch(e.target.value);
                               }}
                         />

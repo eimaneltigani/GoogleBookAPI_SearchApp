@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setAuthUser } from '../redux/store/sessionSlice';
-import { getCurrentUser, signUp, signIn } from 'aws-amplify/auth';
+import { signUp, signIn, autoSignIn } from 'aws-amplify/auth';
 
 import './Login.css';
 
@@ -15,8 +13,6 @@ const Login = () => {
     const [isSignUp, setIsSignUp] = useState(true);
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const user1 = useSelector(state => state.session.user);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,13 +28,15 @@ const Login = () => {
                     username: email,
                     password: password,
                     options: {
-                        autoSignIn: true // or SignInOptions e.g { authFlowType: "USER_SRP_AUTH" }
-                    }
+                        autoSignIn: {
+                          authFlowType: 'USER_SRP_AUTH'
+                        },
+                    },
                 });
 
-                // if signing up, need to add user to database
+                const response2 = await autoSignIn();
                 console.log(response);
-                // dispatch(setAuthUser(user));
+                console.log(response2);
             } else {
                 console.log(email);
                 const response = await signIn({
@@ -46,17 +44,12 @@ const Login = () => {
                     password: password
                 });
                 console.log(response);
-                // dispatch(setAuthUser(user));
             }
-
-            // set isDirty as true
-            // navigate to home page
             navigate("/");
         } catch (error) {
             setErrors(error.message || 'An error occured during authentication.');
         }
     }
-    // dispatch(setAuthUser(null));
 
     return (
         <div className="mainBlock">

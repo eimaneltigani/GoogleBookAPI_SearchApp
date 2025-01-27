@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const sessionSlice = createSlice({
     name: 'session',
     initialState: {
-        user: null,
+        authUser: null,
         isDirty: false,
         isSaving: false
     },
     reducers: {
         setAuthUser: (state, action) => {
-            return {...state, user: action.payload}
+            return {...state, authUser: action.payload}
         },
         setDirty: (state, action) => {
             return {...state, isDirty: action.payload}
@@ -20,10 +20,11 @@ export const sessionSlice = createSlice({
     }
 });
 
-export const { setAuthUser, setRedirect, setDirty, setSaving } = sessionSlice.actions;
+export const { setAuthUser, setDirty, setSaving } = sessionSlice.actions;
 
 // selectors
-export const selectUser = (state) => state.session.user;
+export const selectUser = (state) => state.session.authUser;
 export const selectSaving = (state) => state.session.isSaving;
+
 
 export default sessionSlice.reducer;
