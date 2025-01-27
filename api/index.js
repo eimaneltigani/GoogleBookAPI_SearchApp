@@ -47,6 +47,7 @@ app.put("/favorites/:userId", async (req, res) => {
     try {
         const { userId } = req.params;
         const { favorites } = req.body;
+        console.log(userId);
         const response = await updateUser({userId, favorites});
         res.status(200).json({ updatedFavorites: response.Attributes.favorites })
     } catch (err) {

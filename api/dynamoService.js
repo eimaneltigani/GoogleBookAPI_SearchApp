@@ -44,7 +44,7 @@ export const updateUser = async ({ userId, favorites }) => {
     const command = new UpdateCommand({
         TableName: TABLE_NAME,
         Key: { userId },
-        UpdateExpression: "SET favorites = :favorites",
+        UpdateExpression: "set favorites = :favorites",
         ExpressionAttributeValues: {
             ":favorites": favorites,
         },

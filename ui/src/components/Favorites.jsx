@@ -11,19 +11,22 @@ import { Item } from './Item';
 function Favorites() {
     const dispatch = useDispatch();
     const authUser = useSelector(selectUser);
-    const favorites = useSelector(state => state.favorites.favorites);
+    const stateFavorites = useSelector(state => state.favorites.favorites);
     const prevAuthUser = useRef(authUser);
-    console.log(favorites);
-    
+    console.log(stateFavorites)
+
     useEffect(() => {
-        if(prevAuthUser !== authUser) {
-            authUser 
+        const handleAuthChange = async () => {
+            if(prevAuthUser.current !== authUser) {
+                authUser 
                 ? syncFavoritesFromDatabase() // User just logged in: Sync database favorites to Redux
-                : persistFavoritesToDatabase();  // User just logged out: Save Redux favorites to database
+                : persistFavoritesToDatabase()  // User just logged out: Save Redux favorites to database    
             
-            prevAuthUser.current = authUser;
+                prevAuthUser.current = authUser;
+            }
         }
-    }, [authUser, dispatch])
+        handleAuthChange();
+    }, [authUser])
 
     const syncFavoritesFromDatabase = async () => {
         console.log('auth state changed from null to user');
@@ -40,9 +43,9 @@ function Favorites() {
                 const { favorites: dbFavorites } = await response.json();
                 // Merge favorites, avoiding duplicates
                 const mergedFavorites = [
-                    ...favorites,
+                    ...stateFavorites,
                     ...dbFavorites.filter(
-                        (dbFavorite) => !favorites.some((fav) => fav.id === dbFavorite.id)
+                        (dbFavorite) => !stateFavorites.some((fav) => fav.id === dbFavorite.id)
                     ),
                 ];
                 dispatch(setFavorites(mergedFavorites))
@@ -82,23 +85,26 @@ function Favorites() {
     };
 
     const persistFavoritesToDatabase = async () => {
-        // update favorites in database
-        // reset favorites to empty array
         console.log('auth state changed from user to null');
+        console.log(prevAuthUser);
+        console.log(prevAuthUser.current);
+        console.log(authUser);
 
         try {
-            const response = await fetch(`${API_URL}/${authUser}`, {
+            // persist local favorites in database
+            const response = await fetch(`${API_URL}/${prevAuthUser.current}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ favorites }),
+                body: JSON.stringify({ favorites: stateFavorites }),
             });
+            console.log(response);
     
             if (!response.ok) {
                 console.error("Failed to persist favorites to database");
                 return;
             }
     
-            // Reset Redux state for favorites
+            // Reset local favorites 
             dispatch(setFavorites([]));
         } catch (error) {
             console.error("Error persisting favorites to database:", error);
@@ -108,9 +114,9 @@ function Favorites() {
     return (
         <div className="m-5">
             <h1 className="text-center">Saved Books</h1>
-            {favorites && favorites.length > 0 ? 
+            {stateFavorites && stateFavorites.length > 0 ? 
                 <div className="favorites">
-                    {favorites.map((favorite, index) => {
+                    {stateFavorites.map((favorite, index) => {
                         return <Item key={index} book={favorite} />
                     })}
                 </div> : 
