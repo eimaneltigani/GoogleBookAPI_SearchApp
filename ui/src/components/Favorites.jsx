@@ -12,7 +12,7 @@ function Favorites() {
     const dispatch = useDispatch();
     const authUser = useSelector(selectUser);
     const favorites = useSelector(state => state.favorites.favorites);
-    const prevAuthUser = usePrevious(authUser);
+    const prevAuthUser = useRef(authUser);
     console.log(favorites);
     
     useEffect(() => {
@@ -27,31 +27,33 @@ function Favorites() {
 
     const syncFavoritesFromDatabase = async () => {
         console.log('auth state changed from null to user');
+        console.log(authUser);
         
         // fetch favorites
         try {
-            const response = await fetch(`${API_URL}/favorites/${authUser}`, {
+            const response = await fetch(`${API_URL}/${authUser}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             });
 
-            if (response.status == 404) {
+            if (response.ok) {
+                const { favorites: dbFavorites } = await response.json();
+                // Merge favorites, avoiding duplicates
+                const mergedFavorites = [
+                    ...favorites,
+                    ...dbFavorites.filter(
+                        (dbFavorite) => !favorites.some((fav) => fav.id === dbFavorite.id)
+                    ),
+                ];
+                dispatch(setFavorites(mergedFavorites))
+            } else if (response.status == 404) {
                 console.error("User not found, adding to database");
                 await addUserToDatabase();
-                return;
-            }
-    
-            const { favorites: dbFavorites } = await response.json();
-
-            // Merge favorites, avoiding duplicates
-            const mergedFavorites = [
-                ...favorites,
-                ...dbFavorites.filter(
-                    (dbFavorite) => !favorites.some((fav) => fav.id === dbFavorite.id)
-                ),
-            ];
-
-            dispatch(setFavorites(mergedFavorites))
+            } else {
+                console.error(
+                    `Unexpected error: ${response.status} - ${response.statusText}`
+                );
+            }     
         } catch (error) {
             console.error("Error syncing favorites from database:", error);
         }
@@ -59,12 +61,12 @@ function Favorites() {
 
     const addUserToDatabase = async () => {
         try {
-            const response = await fetch(`${API_URL}/favorites`, {
+            const response = await fetch(`${API_URL}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ authUser }),
+                body: JSON.stringify({ userId: authUser }),
             });
     
             if (response.ok) {
@@ -82,10 +84,10 @@ function Favorites() {
     const persistFavoritesToDatabase = async () => {
         // update favorites in database
         // reset favorites to empty array
-        console.log('auth state changed from user to null')
+        console.log('auth state changed from user to null');
 
         try {
-            const response = await fetch(`${API_URL}/favorites/${authUser}`, {
+            const response = await fetch(`${API_URL}/${authUser}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ favorites }),
