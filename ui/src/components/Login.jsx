@@ -37,6 +37,7 @@ const Login = () => {
                 const response2 = await autoSignIn();
                 console.log(response);
                 console.log(response2);
+
             } else {
                 console.log(email);
                 const response = await signIn({

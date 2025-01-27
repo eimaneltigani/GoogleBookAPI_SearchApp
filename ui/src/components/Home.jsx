@@ -62,7 +62,7 @@ function Home() {
                             placeholder="Enter book title..."
                             onChange={(e) => {
                                 setSearch(e.target.value);
-                              }}
+                            }}
                         />
                         <button onClick={handleSubmit}>Search</button>
                     </div>

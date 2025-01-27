@@ -13,10 +13,13 @@ export const favoritesSlice = createSlice({
             const favorites = state.favorites.filter(book =>
                 book.id !== action.payload)
             return {...state,favorites: [...favorites]};
-        }
+        },
+        setFavorites: (state, action) => {
+            return { ...state, favorites: action.payload };
+        },
     }
 })
 
-export const { addBook, deleteBook } = favoritesSlice.actions;
+export const { addBook, deleteBook, setFavorites } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

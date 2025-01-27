@@ -3,16 +3,14 @@ import { Nav, Navbar, Container, Button, Form } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {FaSearch} from "react-icons/fa";
 import { getCurrentUser, signOut as amplifySignOut } from "aws-amplify/auth";
-import { setAuthUser } from "../redux/store/sessionSlice";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/store/sessionSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavBar() {
-    const dispatch = useDispatch();
     const user = useSelector(selectUser);
+    const navigate = useNavigate();
     console.log(user);
 
     async function currentAuthenticatedUser() {
@@ -21,24 +19,10 @@ function NavBar() {
         console.log(`The username: ${username}`);
         console.log(`The userId: ${userId}`);
         console.log(`The signInDetails: ${signInDetails}`);
-        dispatch(setAuthUser(userId));
       } catch (err) {
         console.log('not logged in');
-        dispatch(setAuthUser(null));
       }
     }
-
-    // const assessLoggedInState = () => {
-    //     Auth.currentAuthenticatedUser()
-    //         .then(user => {
-    //             console.log('logged in');
-    //             dispatch(setAuthUser(user));
-    //         })
-    //         .catch(() => {
-    //             console.log('not logged in');
-    //             dispatch(setAuthUser(null));
-    //         })
-    // }
 
     useEffect(() => {
         currentAuthenticatedUser();
@@ -47,6 +31,7 @@ function NavBar() {
     const signOut = async () => {
         try {
             await amplifySignOut();
+            navigate("/Favorites")
         } catch (error) {
             console.log('error signing out: ', error);
         }
