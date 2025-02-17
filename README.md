@@ -16,7 +16,7 @@ Client-side:
 * Axios: used to fetch data from external and defined APIs endpoinys
 * AWS Amplify: used for authentication (Cognito) and delpoying front-end
 
-Client-side:
+Server-side:
 * NodeJS
 * Express
 * DynamoDB
